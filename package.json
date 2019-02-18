@@ -1,0 +1,94 @@
+{
+  "name": "prereview-components",
+  "version": "0.0.0",
+  "private": true,
+  "license": "MIT",
+  "devDependencies": {
+    "@commitlint/cli": "^6.0.5",
+    "@commitlint/config-conventional": "^6.0.4",
+    "babel-eslint": "^10.0.1",
+    "@babel/preset-env": "^7.0.0",
+    "commitizen": "^2.9.6",
+    "cz-conventional-changelog": "^2.1.0",
+    "eslint": "^4.13.1",
+    "eslint-config-pubsweet": "^0.0.6",
+    "eslint-plugin-import": "^2.8.0",
+    "eslint-plugin-jest": "^21.22.1",
+    "eslint-plugin-jsx-a11y": "^6.0.2",
+    "eslint-plugin-node": "^5.2.1",
+    "eslint-plugin-prettier": "^2.3.1",
+    "eslint-plugin-promise": "^3.6.0",
+    "eslint-plugin-react": "^7.4.0",
+    "eslint-plugin-standard": "^3.0.1",
+    "husky": "^0.14.3",
+    "lerna": "^3.4.3",
+    "lint-staged": "^6.0.0",
+    "prettier": "^1.8.2",
+    "stylelint": "^8.2.0",
+    "stylelint-config-prettier": "^2.0.0",
+    "stylelint-config-pubsweet": "^0.0.3"
+  },
+  "scripts": {
+    "clean": "lerna clean",
+    "styleguide": "npm run --prefix styleguide styleguide",
+    "test": "jest --no-cache --coverage --detectOpenHandles",
+    "lint": "npm run lint:js && npm run lint:style && npm run lint:json",
+    "lint:js": "eslint 'components/**/*.{js,jsx}'",
+    "lint:style": "stylelint 'components/**/*.{css,scss}'",
+    "lint:json": "prettier --list-different '**/*.json'",
+    "precommit": "lint-staged",
+    "cz": "git-cz",
+    "commitmsg": "commitlint -e $GIT_PARAMS"
+  },
+  "jest": {
+    "collectCoverageFrom": [
+      "**/*.{js,jsx}",
+      "!**/*test.{js,jsx}",
+      "!**/test/**",
+      "!**/node_modules/**",
+      "!**/config/**",
+      "!**/coverage/**"
+    ],
+    "coverageDirectory": "<rootDir>/coverage",
+    "projects": [
+      {
+        "rootDir": "<rootDir>/components",
+        "displayName": "components",
+        "moduleNameMapper": {
+          "\\.s?css$": "identity-obj-proxy"
+        },
+        "transformIgnorePatterns": [
+          "/node_modules/(?!@?pubsweet)"
+        ],
+        "testPathIgnorePatterns": [
+          "/node_modules",
+          "config/test",
+          "model-*"
+        ],
+        "globals": {
+          "PUBSWEET_COMPONENTS": [],
+          "fetch": true
+        },
+        "setupFilesAfterEnv": [
+          "<rootDir>/test/jest-setup.js"
+        ]
+      }
+    ]
+  },
+  "workspaces": [
+    "components/*"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/prereview/prereview-pubsweet-components"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  },
+  "dependencies": {},
+  "resolutions": {
+    "webpack-dev-server": "3.1.11"
+  }
+}

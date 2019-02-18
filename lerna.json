@@ -1,0 +1,11 @@
+{
+  "lerna": "2.5.1",
+  "packages": ["components/!(test|config)"],
+  "command": {
+    "publish": {
+      "conventionalCommits": true,
+      "message": "chore(release): publish"
+    }
+  },
+  "version": "independent"
+}
