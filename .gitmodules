@@ -1,0 +1,3 @@
+[submodule "styleguide/pubsweet"]
+	path = styleguide/pubsweet
+	url = git@gitlab.coko.foundation:pubsweet/pubsweet.git
